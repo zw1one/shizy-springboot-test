@@ -4,9 +4,11 @@
 
 ### 实现的功能
 
-##### 1、基本curd及redis缓存
+##### 1、基本curd
 ```
-RESTFul api
+* RESTFul api
+* 使用swagger测试
+* 实现redis缓存
 ```
 
 ##### 2、多环境部署
