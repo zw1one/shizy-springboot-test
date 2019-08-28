@@ -9,6 +9,7 @@
 * RESTFul api
 * 使用swagger测试
 * 实现redis缓存
+* 接口请求的单元测试
 ```
 
 ##### 2、多环境部署
