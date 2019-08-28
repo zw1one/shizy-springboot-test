@@ -1,0 +1,103 @@
+package ${package.Controller}import com.ly.cloud.common.mybatisplus.plugins.PageInfo;
+import com.ly.cloud.web.utils.WebResponse;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+
+;
+#if(${restControllerStyle})
+#else
+#end
+    #if(${superControllerClassPackage})
+        ${superControllerClassPackage}
+            ;
+    #end
+    ${package.Entity}
+        .${entity};
+    ${package.Service}
+        .${table.serviceName};
+
+/**
+ * <p>
+ * $!{table.comment} 前端控制器
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${restControllerStyle})
+@RestController
+#else
+@Controller
+#end
+@RequestMapping("#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+#if(${kotlin})
+class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
+
+#else
+    #if(${superControllerClass})
+    public class ${table.controllerName} extends ${superControllerClass} {
+    #else
+    public class ${table.controllerName} {
+    #end
+
+private final static Log logger=LogFactory.getLog(${table.controllerName}.class);
+
+@Resource
+private ${table.serviceName} $table.serviceName.substring(0,1).toLowerCase()$table.serviceName.substring(1);
+
+@RequestMapping(value = "", method = RequestMethod.GET)
+public WebResponse<PageInfo<${entity}>>queryPage(@RequestParam int pageNum,@RequestParam int pageSize,@ModelAttribute ${entity} dto){
+        try{
+        Page<${entity}> page= ${table.serviceName.substring(0,1).toLowerCase()}${table.serviceName.substring(1)}.selectPage(new Page<${entity}>(pageNum,pageSize),dto);
+        return new WebResponse<PageInfo<${entity}>>().success(PageInfo.toPageInfo(page));
+        }catch(Exception e){
+        logger.error(e.getMessage(),e);
+        return new WebResponse<PageInfo<${entity}>>().failure(e.getMessage());
+        }
+        }
+
+@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+public WebResponse<${entity}> get(@PathVariable("id") String id){
+        try{
+        return new WebResponse<${entity}>().success(${table.serviceName.substring(0,1).toLowerCase()}${table.serviceName.substring(1)}.selectById(id));
+        }catch(Exception e){
+        logger.error(e.getMessage(),e);
+        return new WebResponse<${entity}>().failure(e.getMessage());
+        }
+        }
+
+@RequestMapping(value = "", method = RequestMethod.POST)
+public WebResponse<Boolean> add(@RequestBody ${entity} dto){
+        try{
+        return new WebResponse<Boolean>().success(${table.serviceName.substring(0,1).toLowerCase()}${table.serviceName.substring(1)}.insert(dto));
+        }catch(Exception e){
+        logger.error(e.getMessage(),e);
+        return new WebResponse<Boolean>().failure(e.getMessage());
+        }
+        }
+
+@RequestMapping(value = "/{id}/delete", method = RequestMethod.POST)
+public WebResponse<Boolean> delete(@PathVariable("id") String id){
+        try{
+        return new WebResponse<Boolean>().success(${table.serviceName.substring(0,1).toLowerCase()}${table.serviceName.substring(1)}.deleteById(id));
+        }catch(Exception e){
+        logger.error(e.getMessage(),e);
+        return new WebResponse<Boolean>().failure(e.getMessage());
+        }
+        }
+
+@RequestMapping(value = "/update", method = RequestMethod.POST)
+public WebResponse<Boolean> update(@RequestBody ${entity} dto){
+        try{
+        return new WebResponse<Boolean>().success(${table.serviceName.substring(0,1).toLowerCase()}${table.serviceName.substring(1)}.updateById(dto));
+        }catch(Exception e){
+        logger.error(e.getMessage(),e);
+        return new WebResponse<Boolean>().failure(e.getMessage());
+        }
+        }
+
+        }
+
+#end

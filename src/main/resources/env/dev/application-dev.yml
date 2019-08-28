@@ -1,0 +1,123 @@
+### 本地开发环境
+
+###################### 框架参数配置 ######################
+
+server:
+  port: 80
+  #  servlet:
+  #    context-path: /shizy #访问url的工程名 不写就是/
+  tomcat:
+    max-connections: 10000
+    max-threads: 200
+    min-spare-threads: 10
+
+spring.resources:
+  static-locations: classpath:/webapps/static/,file:${file.PathWindows}/static/,file:${file.PathLinux}/static/
+
+###################### datasource ######################
+
+### mybatis-plus 多数据源支持
+spring.datasource.dynamic:
+  primary: master
+  datasource:
+    master:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+      username: root
+      password: 123456
+#    slave1: # 多数据源test
+#      driver-class-name: com.mysql.jdbc.Driver
+#      url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&autoReconnect=true
+#      username: root
+#      password: 123456
+
+### alibaba druid
+spring.datasource.druid: # druid minitor
+  stat-view-servlet: # http://localhost:80/druid
+    login-username: admin
+    login-password: admin123456!@#
+
+spring.datasource.druid.dynamic.datasource: # 连接池配置
+  master: # 这个master对应上面的master数据源
+    druid:
+      initialSize: 10
+      maxActive: 30
+      minIdle: 10
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 180000
+      testWhileIdle: true
+      validationQuery: select 1 from dual
+#  slave1: # 多数据源test
+#    druid:
+#      initialSize: 10
+#      maxActive: 30
+#      minIdle: 10
+#      maxWait: 60000
+#      timeBetweenEvictionRunsMillis: 180000
+#      testWhileIdle: true
+#      validationQuery: select 1 from dual
+
+### redis
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: 3000ms
+        max-idle: 8
+        min-idle: 0
+    timeout: 3000ms
+
+### mybatis-plus
+mybatis-plus:
+  typeAliasesPackage: com.shizy.entity.*
+  mapper-locations: classpath:mapper/*/*Mapper.xml
+  global-config:
+    id-type: 3 #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    field-strategy: 2 #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    db-column-underline: true #驼峰下划线转换
+    refresh-mapper: true #刷新mapper 调试神器
+#    logic-delete-value: 1 #逻辑删除配置 1:删除 0：未删除
+#    logic-not-delete-value: 0
+#    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector #自定义SQL注入器 逻辑删除SQL注入器
+  configuration: # 原生配置
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 日志输出sql语句
+
+
+
+################## 自定义参数 ###################
+
+
+### 文件存放的地址-绝对路径
+file:
+  PathWindows: d:/file
+  PathLinux: /opt/file
+
+# 是否使用redis缓存
+redis:
+  enable: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

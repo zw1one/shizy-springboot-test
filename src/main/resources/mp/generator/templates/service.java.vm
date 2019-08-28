@@ -1,0 +1,23 @@
+package ${package.Service};
+${package.Entity}
+        .${entity};
+    ${superServiceClassPackage}
+        ;
+
+/**
+ * <p>
+ * $!{table.comment} 服务接口
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${kotlin})
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
+#else
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+
+        Page<${entity}> selectPage(Page<${entity}> page, ${entity} dto);
+
+        }
+#end

@@ -1,0 +1,64 @@
+package ${package.ServiceImpl}import org.springframework.stereotype.Service;
+
+;
+${package.Entity}
+        .${entity};
+    ${package.Mapper}
+        .${table.mapperName};
+    ${package.Service}
+        .${table.serviceName};
+    ${superServiceImplClassPackage}
+        ;
+
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+#if(${kotlin})
+open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>(), ${table.serviceName} {
+
+        }
+#else
+        @Transactional(readOnly=true,propagation=Propagation.NOT_SUPPORTED)
+        public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}>implements ${table.serviceName} {
+
+        private final static Log logger=LogFactory.getLog(${table.serviceImplName}.class);
+
+        @Autowired
+        private ${table.mapperName} ${table.mapperName.substring(0,1).toLowerCase()}${table.mapperName.substring(1)};
+
+        @Override
+        public Page<${entity}>selectPage(Page<${entity}>page, ${entity} dto){
+        page.setRecords(${table.mapperName.substring(0,1).toLowerCase()}${table.mapperName.substring(1)}.selectPage(page,dto));
+        return page;
+        }
+
+        @Override
+        public ${entity} selectById(Serializable id){
+        return super.selectById(id);
+        }
+
+        @Transactional(readOnly=false,propagation=Propagation.REQUIRED)
+        @Override
+        public boolean insert(${entity} entity){
+        return super.insert(entity);
+        }
+
+        @Transactional(readOnly=false,propagation=Propagation.REQUIRED)
+        @Override
+        public boolean deleteById(Serializable id){
+        return super.deleteById(id);
+        }
+
+        @Transactional(readOnly=false,propagation=Propagation.REQUIRED)
+        @Override
+        public boolean updateById(${entity} entity){
+        return super.updateById(entity);
+        }
+        }
+#end

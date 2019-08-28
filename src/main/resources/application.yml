@@ -1,0 +1,30 @@
+
+###########################################
+# spring项下的配置都可以写在一起 但是看着不舒服就拆开了
+
+spring.profiles:
+  active:
+    @profilesActive@ #见/resources/env/xxx/application-xxx.yml。需在IDEA的Active profile处添加"dev"
+
+spring.application:
+  name: web-base
+#  mvc:
+#    static-path-pattern: /static/** # 静态文件要求的前缀
+
+spring.freemarker:
+  template-loader-path: classpath:/webapps/templates/
+  suffix: .html
+  cache: false
+
+spring.servlet:
+  multipart:
+    max-file-size: 50Mb
+    max-request-size: 100Mb
+
+spring.http:
+  encoding:
+    charset: UTF-8
+
+
+###########################################
+
