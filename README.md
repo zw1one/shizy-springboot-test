@@ -45,5 +45,3 @@ mvn clean package -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Prelease
 <br>
 <br>
 <br>
-<br>
-<br>
