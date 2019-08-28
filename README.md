@@ -1,41 +1,23 @@
 # shizy-springboot-Test
 
-测试实现一堆乱七八糟的功能
+在springboot上实现一些功能作技术储备
 
-## quick start
+### 实现的功能
 
-* <a>http://127.0.0.1/swagger-ui.html</a>
+##### 1、基本curd及redis缓存
+```
+RESTFul api
+```
 
-### 启动出现问题
+##### 2、多环境部署的配置
 
 * IDEA的Active profiles处，添加`dev`
-* 查看`application-dev.yml`，检查MySQL、Redis
-
-### MySQL建库建表
-
-```
-CREATE DATABASE test;
-
-CREATE TABLE `user`  (
-  `user_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `user_account` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `user_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
-INSERT INTO `user` VALUES ('d78b3c1604514a33870c319a31043e6e', 'string', 'string');
-INSERT INTO `user` VALUES ('e8acb754f423475eb166981a60c9c037', 'string', 'string');
-
-```
-
-### 打包部署
 
 * Maven打包命令
 ```
 mvn clean package -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Pdev
 mvn clean package -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Prelease
 ```
-
 打包完idea启动项目报错，Rebuild project或者mvn clean
 
 * jar包运行命令
@@ -43,6 +25,19 @@ mvn clean package -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Prelease
 (java -server -Xmx1024m -Xms256m -XX:+UseParallelGC -XX:ParallelGCThreads=20  -jar Shizy-SpringBoot-Demo-1.0-SNAPSHOT.jar &)
 ```
 
+##### 3、自定义注解切面 todo
+```
+添加注解的方法，注入一个切面，去写入MongoDB作为访问log
+```
+
+##### 4、@Async实现异步处理
+```
+实现注解切面时，将写入MongoDB的操作用异步处理，不影响主线程的运行时间。
+为保证切面在多线程插入log时的执行顺序，使用公平锁锁住插入操作，实现线程先进先执行。
+```
+
+<br>
+<br>
 <br>
 <br>
 <br>
