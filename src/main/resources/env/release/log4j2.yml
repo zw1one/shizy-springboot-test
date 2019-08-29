@@ -9,7 +9,7 @@ Configuration:
       #生产：-Dlog.level.console=warn -Dlog.level.xjj=info
       - name: log.level.console
         value: info
-      - name: log.ybg.level
+      - name: log.shizy.level
         value: info
       - name: log.path
         value: logs
@@ -47,10 +47,10 @@ Configuration:
       AppenderRef:
         - ref: CONSOLE
         - ref: ROLLING_FILE
-    Logger: # 为com.ybg包配置特殊的Log级别，方便调试
-      - name: com.ly.ybg
+    Logger: # 为com.shizy包配置特殊的Log级别，方便调试
+      - name: com.shizy
         additivity: false
-        level: ${sys:log.ybg.level}
+        level: ${sys:log.shizy.level}
         AppenderRef:
           - ref: CONSOLE
           - ref: ROLLING_FILE
