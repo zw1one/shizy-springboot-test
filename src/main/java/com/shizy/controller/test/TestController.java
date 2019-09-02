@@ -40,9 +40,10 @@ public class TestController {
          *
          */
 
+//          @Async限制线程数
 //        https://stackoverflow.com/questions/13206792/spring-async-limit-number-of-threads
-//
-//
+
+//       公平锁
 //        @Configuration
 //        @EnableAsync
 //        public class AppConfig implements AsyncConfigurer {
