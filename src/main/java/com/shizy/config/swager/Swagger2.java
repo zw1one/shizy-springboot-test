@@ -26,7 +26,7 @@ public class Swagger2 {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("File-To-Database-Web")
+                .title("shizy-springboot-test")
 //                .description("更多Spring Boot相关文章请关注：http://blog.didispace.com/")
 //                .termsOfServiceUrl("http://blog.didispace.com/")
                 .version("1.0")
