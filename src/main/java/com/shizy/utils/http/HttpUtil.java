@@ -39,7 +39,11 @@ public class HttpUtil {
             StringBuilder uri = new StringBuilder(url);
 
             if (urlParam != null && !urlParam.isEmpty()) {
-                uri.append("?");
+                if(!url.contains("?")){
+                    uri.append("?");
+                }else{
+                    uri.append("&");
+                }
                 for (Map.Entry entry : (Set<Map.Entry>) urlParam.entrySet()) {
                     uri.append(URLEncoder.encode(entry.getKey().toString(), "UTF-8"));
                     uri.append("=");
