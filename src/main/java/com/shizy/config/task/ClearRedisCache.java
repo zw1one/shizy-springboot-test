@@ -17,7 +17,7 @@ import java.util.List;
 @Configuration
 public class ClearRedisCache {
 
-//    private static final Logger logger = LoggerFactory.getLogger(ClearRedisCache.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClearRedisCache.class);
 
     private static List cacheKeys = new ArrayList();
 
