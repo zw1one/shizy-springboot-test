@@ -21,8 +21,8 @@ public class MpGenerator {
     public static void main(String[] args) {
 
 //        String[] tablePrefix = new String[]{"ybg_"};
-        String[] tablePrefix = new String[]{};
-        String[] includeTables = new String[]{"user"};//需要生成的表
+        String[] tablePrefix = new String[]{"ly_qt_db_"};
+        String[] includeTables = new String[]{"ly_qt_db_dyxx", "ly_qt_db_llls"};//需要生成的表
         String[] excludeTables = new String[]{};//排除生成的表
 
         String moduleName = "user";//模块名
@@ -77,10 +77,15 @@ public class MpGenerator {
 //        dsc.setPassword("ly_cloud_xg_zhcp");
 //        dsc.setUrl("jdbc:oracle:thin:@192.168.6.217:1521:orcl");
 
+//        dsc.setDriverName("com.mysql.jdbc.Driver");
+//        dsc.setUsername("root");
+//        dsc.setPassword("123456");
+//        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/test");
+
         dsc.setDriverName("com.mysql.jdbc.Driver");
-        dsc.setUsername("root");
-        dsc.setPassword("123456");
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3306/test");
+        dsc.setUsername("ly_db_campus");
+        dsc.setPassword("ly_db_campus");
+        dsc.setUrl("jdbc:mysql://192.168.37.12:3306/ly_db_campus");
 
         mpg.setDataSource(dsc);
 
